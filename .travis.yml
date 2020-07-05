@@ -13,3 +13,15 @@ after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   - docker push darivo/vida-notes-service
+
+deploy: 
+  provider: elasticbeanstalk
+  region: eu-west-2
+  app: vida-notes
+  env: VidaNotes-env
+  bucket_name: elasticbeanstalk-eu-west-2-653100821739
+  bucket_path: vida-notes
+  on: 
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
